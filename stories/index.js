@@ -1,17 +1,21 @@
 import React from "react";
-
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-
 import "index.scss";
 import DayListItem from "components/dayListItem";
 import Button from "components/Button";
 import DayList from "components/dayList";
 import InterviewerListItem from "components/interviewerListItem";
 import InterviewerList from "components/interviewerList";
+//appointments
 import Appointment from "components/appointments/index.js";
 import Header from "components/appointments/header"
 import Empty from "components/appointments/empty"
+import Show from "components/appointments/show"
+
+// import Confirm from "components/appointments/confrim"
+// import Error from "components/appointments/error"
+// import Status from "components/appointments/status"
 
 
 //button stories
@@ -154,3 +158,5 @@ storiesOf("DayList", module)
   .add("Appointment with Time", () => <Appointment time="12pm" />)
   .add("Header", () => <Header time="12pm"/>)
   .add("Empty", () => <Empty onAdd={action("onAdd")}/>)
+  .add("Show", () => <Show onEdit={action("onEdit")}/>)
+  .add("Show", () => <Show onDelete={action("onDelete")}/>)

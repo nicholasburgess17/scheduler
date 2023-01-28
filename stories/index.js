@@ -9,6 +9,8 @@ import Button from "components/Button";
 import DayList from "components/dayList";
 import InterviewerListItem from "components/interviewerListItem";
 import InterviewerList from "components/interviewerList";
+import Appointment from "components/Appointment/index.js";
+
 
 //button stories
 storiesOf("Button", module)
@@ -66,13 +68,13 @@ storiesOf("DayList", module)
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
   })
   .add("Monday", () => (
-    <DayList days={days} day={"Monday"} setDay={action("setDay")} />
+    <DayList days={days} value={"Monday"} onChange={action("setDay")} />
   ))
   .add("Tuesday", () => (
-    <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
+    <DayList days={days} value={"Tuesday"} onChange={action("setDay")} />
   ))
   .add("Wednesday", () => (
-    <DayList days={days} day={"Wednesday"} setDay={action("setDay")} />
+    <DayList days={days} value={"Wednesday"} onChange={action("setDay")} />
   ));
 
 
@@ -104,10 +106,9 @@ storiesOf("DayList", module)
     ))
     .add("Clickable", () => (
       <InterviewerListItem
-        id={interviewer.id}
         name={interviewer.name}
         avatar={interviewer.avatar}
-        setInterviewer={action("setInterviewer")}
+        setInterviewer={() => action("setInterviewer")(interviewer.id)}
       />
     ));
 
@@ -121,23 +122,23 @@ storiesOf("DayList", module)
     ];
     
     storiesOf("InterviewerList", module)
-      .addParameters({
-        backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-      })
-      .add("Initial", () => (
-        <InterviewerList
-          interviewers={interviewers}
-        />
-      ))
-      .add("Selected", () => (
-        <InterviewerList
-          interviewers={interviewers}
-          interviewer={3}
-        />
-      ))
-      .add("Clickable", () => (
-        <InterviewerList
-          interviewers={interviewers}
-          setInterviewer={action("setInterviewer")}
-        />
-      ));
+  .addParameters({
+    backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
+  })
+  .add("Initial", () => (
+    <InterviewerList
+      interviewers={interviewers}
+    />
+  ))
+  .add("Selected", () => (
+    <InterviewerList
+      interviewers={interviewers}
+      value={3}
+    />
+  ))
+  .add("Clickable", () => (
+    <InterviewerList
+      interviewers={interviewers}
+      onChange={action("setInterviewer")}
+    />
+  ));

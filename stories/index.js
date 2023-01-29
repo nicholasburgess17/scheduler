@@ -15,6 +15,7 @@ import Show from "components/appointments/show"
 import Confirm from "components/appointments/confirm"
 import Error from "components/appointments/error"
 import Status from "components/appointments/status"
+import Form from "components/appointments/form";
 
 
 //button stories
@@ -183,3 +184,35 @@ storiesOf("DayList", module)
     onClose={action("onClose")}
     />
   ))
+  .add("Edit", () => (
+    <Form
+      student="Nick Burgess"
+      interviewer={3}
+      interviewers={interviewers}
+      onSave={action("onSave")}
+      onCancel={action("onCancel")}
+    />
+  ))
+  .add("Create", () => (
+    <Form
+      interviewers={interviewers}
+      onSave={action("onSave")}
+      onCancel={action("onCancel")}
+    />
+  ))
+  // .add("Appointment Empty", () => (
+  //   <Fragment>
+  //     <Appointment id={1} time="4pm" />
+  //     <Appointment time="5pm" />
+  //   </Fragment>
+  // ))
+  // .add("Appointment Booked", () => (
+  //   <Fragment>
+  //     <Appointment
+  //       id={1}
+  //       time="4pm"
+  //       interview={{ student: "Lydia Miller-Jones", interviewer }}
+  //     />
+  //     <Appointment time="5pm" />
+  //   </Fragment>
+  // ));

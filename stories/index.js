@@ -12,8 +12,7 @@ import Appointment from "components/appointments/index.js";
 import Header from "components/appointments/header"
 import Empty from "components/appointments/empty"
 import Show from "components/appointments/show"
-
-// import Confirm from "components/appointments/confrim"
+import Confirm from "components/appointments/confirm"
 // import Error from "components/appointments/error"
 // import Status from "components/appointments/status"
 
@@ -156,7 +155,20 @@ storiesOf("DayList", module)
   })
   .add("Appointment", () => <Appointment />)
   .add("Appointment with Time", () => <Appointment time="12pm" />)
-  .add("Header", () => <Header time="12pm"/>)
-  .add("Empty", () => <Empty onAdd={action("onAdd")}/>)
-  .add("Show", () => <Show onEdit={action("onEdit")}/>)
-  .add("Show", () => <Show onDelete={action("onDelete")}/>)
+  .add("Header", () => <Header time="12pm" />)
+  .add("Empty", () => <Empty onAdd={action("onAdd")} />)
+  .add("Show", () => (
+    <Show 
+      student="Lydia Miller-Jones"
+      interviewer={interviewer}
+      onEdit={action("onEdit")}
+      onDelete={action("onDelete")}
+    />
+  ))
+  .add("Confirm", () => (
+    <Confirm 
+      message="Delete the appointment?"
+      onConfirm={action("onConfirm")}
+      onCancel={action("onCancel")}
+    />
+  ))

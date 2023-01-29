@@ -14,7 +14,7 @@ import Empty from "components/appointments/empty"
 import Show from "components/appointments/show"
 import Confirm from "components/appointments/confirm"
 // import Error from "components/appointments/error"
-// import Status from "components/appointments/status"
+import Status from "components/appointments/status"
 
 
 //button stories
@@ -170,5 +170,10 @@ storiesOf("DayList", module)
       message="Delete the appointment?"
       onConfirm={action("onConfirm")}
       onCancel={action("onCancel")}
+    />
+  ))
+  .add("Status", () => (
+    <Status
+    message="Deleting"
     />
   ))

@@ -13,7 +13,7 @@ import Header from "components/appointments/header"
 import Empty from "components/appointments/empty"
 import Show from "components/appointments/show"
 import Confirm from "components/appointments/confirm"
-// import Error from "components/appointments/error"
+import Error from "components/appointments/error"
 import Status from "components/appointments/status"
 
 
@@ -175,5 +175,11 @@ storiesOf("DayList", module)
   .add("Status", () => (
     <Status
     message="Deleting"
+    />
+  ))
+  .add("Error", () => (
+    <Error
+    message="Could not delete appointment."
+    onClose={action("onClose")}
     />
   ))

@@ -17,3 +17,4 @@ export function getAppointmentsForDay(state, day) {
   const appointmentList = appointmentIDs.map((id) => state.appointments[id]);
   return appointmentList;
 }
+

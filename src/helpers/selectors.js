@@ -1,7 +1,5 @@
-import DayList from "components/dayList";
-
-export function getAppointmentsForDay(state, day) {
-
+export  function getAppointmentsForDay(state, day) {
+ console.log(state)
   //find day that matches, returns object 
   const matchDay = state.days.find((days) => days.name === day);
 

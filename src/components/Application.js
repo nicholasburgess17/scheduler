@@ -15,32 +15,32 @@ export default function Application(props) {
     days: [],
     appointments: {},
   });
-//retrieve appointments for a given day
+  //retrieve appointments for a given day
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const setDay = (day) => setState({ ...state, day: day });
 
   //display appointments for a given day
-  const appointments = getAppointmentsForDay(state, day);
+  const appointments = getAppointmentsForDay(state, state.day);
 
-const schedule = appointments.map((appointment) => {
-  const interview = getInterview(state, appointment.interview);
+  const schedule = appointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
 
-  return (
-    <Appointment
-      key={appointment.id}
-      id={appointment.id}
-      time={appointment.time}
-      interview={interview}
-    />
-  );
-});
+    return (
+      <Appointment
+        key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        interview={interview}
+      />
+    );
+  });
 
   //retrieve data from api
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:8001/api/days"),
       axios.get("http://localhost:8001/api/appointments"),
-      axios.get("http://localhost:8001/api/interviewers")
+      axios.get("http://localhost:8001/api/interviewers"),
     ]).then((all) => {
       // sets state for days, appointments and interviewers from data in api
       setState((prev) => ({
@@ -49,7 +49,6 @@ const schedule = appointments.map((appointment) => {
         appointments: all[1].data,
         interviewers: all[2].data,
       }));
-      
     });
   }, []);
 
@@ -76,7 +75,7 @@ const schedule = appointments.map((appointment) => {
           alt="Lighthouse Labs"
         />
       </section>
-      <section className="schedule">{appointmentComps}</section>
+      <section className="schedule">{schedule}</section>
     </main>
   );
 }

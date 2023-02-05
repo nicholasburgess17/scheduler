@@ -1,22 +1,35 @@
 import React from "react";
+//styles
 import "components/appointments/styles.scss";
+
+//components
 import Header from "./header";
 // import Confirm from "./confirm";
 import Empty from "./empty";
 import Show from "./show";
 // import Status from "./status";
 
+//hooks
+import useVisualMode from "hooks/useVisualMode";
+
 export default function Appointment(props) {
+  const EMPTY = "EMPTY";
+  const SHOW = "SHOW";
+
+  const { mode, transition, back } = useVisualMode(
+    props.interview ? SHOW : EMPTY
+  );
+
   return (
     <article className="appointment">
       <Header time={props.time} />
-      {props.interview ? (
+      {mode === EMPTY && <Empty onAdd={() => console.log("Clicked onAdd")} />}
+
+      {mode === SHOW && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
         />
-      ) : (
-        <Empty />
       )}
     </article>
   );

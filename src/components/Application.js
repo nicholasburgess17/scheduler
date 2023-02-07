@@ -6,7 +6,7 @@ import "components/Application.scss";
 import DayList from "./dayList";
 import Appointment from "./appointments";
 
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
 export default function Application(props) {
   const [state, setState] = useState({
@@ -15,22 +15,51 @@ export default function Application(props) {
     days: [],
     appointments: {},
   });
+
+  //function to be passed down to each appointment as a prop, will change local state when an interview is booked
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    console.log(id, interview);
+    setState({
+      ...state,
+      appointments
+    });
+    return axios
+      .put(`/api/appointments/${id}`, { interview })
+      .then((response) => {
+        setState((prev) => ({
+          ...prev,
+          appointments,
+        }));
+      })
+      .catch((err) => console.log(err));
+  }
   //retrieve appointments for a given day
-  const dailyAppointments = getAppointmentsForDay(state, state.day);
   const setDay = (day) => setState({ ...state, day: day });
 
   //display appointments for a given day
   const appointments = getAppointmentsForDay(state, state.day);
+  const interviewers = getInterviewersForDay(state, state.day);
 
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
 
+    
     return (
       <Appointment
         key={appointment.id}
         id={appointment.id}
         time={appointment.time}
         interview={interview}
+        interviewers={interviewers}
+        bookInterview={bookInterview}
       />
     );
   });

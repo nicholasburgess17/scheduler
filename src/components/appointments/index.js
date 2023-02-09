@@ -21,6 +21,8 @@ export default function Appointment(props) {
   const CONFIRM = "CONFIRM"
   const DELETE = "DELETE"
   const EDIT = "EDIT"
+  const ERROR_SAVE ="ERROR_SAVE"
+  const ERROR_DELETE="ERROR_DELETE"
 
   const { mode, transition, back } = useVisualMode(
     //if there is an interview, show it, else show empty
@@ -37,15 +39,15 @@ export default function Appointment(props) {
     props
       .bookInterview(props.id, interview)
       .then((res) => transition(SHOW))
-      .catch((err) => console.log(err));
+      .catch((err) => transition(ERROR_SAVE, true));
   }
 
   function cancel() {
-    transition(DELETE)
+    transition(DELETE, true)
     props
     .cancelInterview(props.id)
     .then((res) => transition(EMPTY))
-    .catch((err) => console.log(err))
+    .catch((err) => transition(ERROR_DELETE, true))
   }
   return (
     <article className="appointment">

@@ -13,7 +13,7 @@ export default function useVisualMode(initial) {
     }
     //add new mode to stack
     setMode(newMode);
-    setHistory([...newHistory, newMode]);
+    setHistory(prev => [...prev, newMode]);
   }
 
   function back() {

@@ -26,6 +26,25 @@ export default function useApplicationData() {
   }, []);
   //retrieve appointments for a given day
   const setDay = (day) => setState({ ...state, day: day });
+  //update spots for selected day
+const updateSpots = (day, days, appointments) => {
+  //find day object in days array
+  const dayObj = days.find((d) => d.name === day);
+  let spots = 0;
+
+  for (const id of dayObj.appointments) {
+    //get appointment id from appointment object
+    const appointment = appointments[id];
+
+    //if there is no interview, add to spots
+    if (!appointment.interview) {
+      spots++;
+    } 
+  }
+  return spots
+}
+
+
   //function to be passed down to each appointment as a prop, will change local state when an interview is booked
   function bookInterview(id, interview) {
     const appointment = {
@@ -36,13 +55,24 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
-    // console.log(id, interview);
+    
+    //update number of spots for given day
+    const spots = updateSpots(state.day, state.days, appointments);
+    // update the days object in state
+    const days = state.days.map((day) => {
+      if (day.name === state.day) {
+        return { ...day, spots };
+      }
+      return day;
+    });
+
     return axios
       .put(`/api/appointments/${id}`, { interview })
       .then((response) => {
         setState((prev) => ({
           ...prev,
           appointments,
+          days
         }));
       })
       .catch((err) => console.log(err));
@@ -54,6 +84,16 @@ export default function useApplicationData() {
     const appointment = { ...state.appointments[id], interview };
     const appointments = { ...state.appointments, [id]: appointment };
 
+    //update number of spots for given day
+    const spots = updateSpots(state.day, state.days, appointments);
+    // update the days object in state
+    const days = state.days.map((day) => {
+      if (day.name === state.day) {
+        return { ...day, spots };
+      }
+      return day;
+    });
+
     //send to api
     return axios
       .delete(`/api/appointments/${id}`, { interview })
@@ -61,6 +101,7 @@ export default function useApplicationData() {
         setState((prev) => ({
           ...prev,
           appointments,
+          days
         }));
       })
       .catch((err) => console.log(err));

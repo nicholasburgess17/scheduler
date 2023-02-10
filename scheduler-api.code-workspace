@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "../scheduler-api"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}

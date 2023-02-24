@@ -41,23 +41,23 @@ npm run cypress
 
 ## Demonstration 
 
-# Editing an appointment
+### Editing an appointment
 ![Editing an appointment](https://github.com/nicholasburgess17/scheduler/blob/master/docs/edit-appoointment.png)
 
-# Saving an appointment
+### Saving an appointment
 ![Saving appointment](https://github.com/nicholasburgess17/scheduler/blob/master/docs/Saving.png)
 
-# Daylist is full, lets delete an appointment
+### Daylist is full, lets delete an appointment
 ![Daylist is full, lets delete an appointment](https://github.com/nicholasburgess17/scheduler/blob/master/docs/dayList-hover.png)
 
-# Confirm deletion of appointment
+### Confirm deletion of appointment
 ![Confirm deletion of appointment](https://github.com/nicholasburgess17/scheduler/blob/master/docs/Delete-confirmation.png)
 
-# Deleting appointment
+### Deleting appointment
 ![deleting appointment](https://github.com/nicholasburgess17/scheduler/blob/master/docs/Deleting.png)
 
-# Homepage with one appontment left on Monday after deletion
+### Homepage with one appontment left on Monday after deletion
 ![Homepage with one appontment left on Monday after deletion](https://github.com/nicholasburgess17/scheduler/blob/master/docs/homepage.png)
 
-# Daylist
+### Daylist
 ![Daylist](https://github.com/nicholasburgess17/scheduler/blob/master/docs/Daylist.png)

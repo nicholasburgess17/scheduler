@@ -38,3 +38,6 @@ npm run storybook
 ```sh
 npm run cypress
 ```
+
+## Demonstration 
+![](https://github.com/nicholasburgess17/scheduler/blob/master/docs/Scheduler.gif)

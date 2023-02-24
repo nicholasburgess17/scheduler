@@ -17,9 +17,14 @@ export default function DayListItem(props) {
     return `${props.spots} spots remaining`;
   };
   return (
-    <li onClick={() => props.setDay(props.name)} selected={props.selected}>
-      <h2 className={dayClass}>{props.name}</h2>
-      <h3 className={dayClass}>{formatSpots()}</h3>
+    <li
+      data-testid="day"
+      className={dayClass}
+      onClick={() => props.setDay(props.name)}
+      selected={props.selected}
+    >
+      <h2>{props.name}</h2>
+      <h3>{formatSpots()}</h3>
     </li>
   );
 }

@@ -50,61 +50,61 @@ export default function Appointment(props) {
       .then((res) => transition(EMPTY))
       .catch((err) => transition(ERROR_DELETE, true));
   }
-  return (
-    <article className="appointment" data-testid="appointment">
-      <Header time={props.time} />
-      {/* if empty, allow usage of create component */}
-      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-      {mode === SAVING && <Status message="Saving" />}
-      {mode === DELETE && <Status message="DELETING" />}
-      {mode === CONFIRM && (
-        <Confirm
-          message="Are you sure you would like to delete?"
-          onCancel={back}
-          onConfirm={cancel}
-        />
-      )}
-      {/* if there is an interview, use show component */}
-      {mode === SHOW && (
-        <Show
-          student={props.interview.student}
-          interviewer={props.interview.interviewer}
-          onEdit={() => transition(EDIT)}
-          onDelete={() => transition(CONFIRM)}
-        />
-      )}
-      {/* if mode is create, show form, allwo canelation using back function in useVisualMode */}
-      {mode === CREATE && (
-        <Form
-          name={props.name}
-          value={props.value}
-          interviewers={props.interviewers}
-          interviewer={props.interviewers.interviewer}
-          onCancel={back}
-          onSave={save}
-        />
-      )}
-      {mode === EDIT && (
-        <Form
-          student={props.interview.student}
-          interviewers={props.interviewers}
-          interviewer={props.interview.interviewer.id}
-          onCancel={back}
-          onSave={save}
-        />
-      )}
-   {mode === ERROR_SAVE && (
-        <Error
-          message="Error. Could not confirm appointment."
-          onClose={() => back()}
-        />
-      )}
-      {mode === ERROR_DELETE && (
-        <Error
-          message="Error. Could not cancel appointment."
-          onClose={() => transition(SHOW)}
-        />
-      )}
-    </article>
-  );
-};
+    return (
+      <article className="appointment" data-testid="appointment">
+        <Header time={props.time} />
+        {/* if empty, allow usage of create component */}
+        {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+        {mode === SAVING && <Status message="Saving" />}
+        {mode === DELETE && <Status message="DELETING" />}
+        {mode === CONFIRM && (
+          <Confirm
+            message="Are you sure you would like to delete?"
+            onCancel={back}
+            onConfirm={cancel}
+          />
+        )}
+        {/* if there is an interview, use show component */}
+        {mode === SHOW && (
+          <Show
+            student={props.interview.student}
+            interviewer={props.interview.interviewer}
+            onEdit={() => transition(EDIT)}
+            onDelete={() => transition(CONFIRM)}
+          />
+        )}
+        {/* if mode is create, show form, allwo canelation using back function in useVisualMode */}
+        {mode === CREATE && (
+          <Form
+            name={props.name}
+            value={props.value}
+            interviewers={props.interviewers}
+            interviewer={props.interviewers.interviewer}
+            onCancel={back}
+            onSave={save}
+          />
+        )}
+        {mode === EDIT && (
+          <Form
+            student={props.interview.student}
+            interviewers={props.interviewers}
+            interviewer={props.interview.interviewer.id}
+            onCancel={back}
+            onSave={save}
+          />
+        )}
+    {mode === ERROR_SAVE && (
+          <Error
+            message="Error. Could not confirm appointment."
+            onClose={() => transition(SHOW)}
+          />
+        )}
+        {mode === ERROR_DELETE && (
+          <Error
+            message="Error. Could not cancel appointment."
+            onClose={() => transition(SHOW)}
+          />
+        )}
+      </article>
+    );
+  };

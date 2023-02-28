@@ -39,15 +39,15 @@ export default function Appointment(props) {
     transition(SAVING);
     props
       .bookInterview(props.id, interview)
-      .then((res) => transition(SHOW))
+      .then(() => transition(SHOW))
       .catch((err) => transition(ERROR_SAVE, true));
   }
 
   function cancel() {
     transition(DELETE, true);
     props
-      .cancelInterview(props.id)
-      .then((res) => transition(EMPTY))
+      .cancelInterview(props.id)  
+      .then(() => transition(EMPTY))
       .catch((err) => transition(ERROR_DELETE, true));
   }
     return (
@@ -93,16 +93,17 @@ export default function Appointment(props) {
             onSave={save}
           />
         )}
+        {/* transition to show used on lines 100 & 106, when back is called instead, user gets stuck on previous state, (saving or deleting) */}
     {mode === ERROR_SAVE && (
           <Error
             message="Error. Could not confirm appointment."
-            onClose={() => transition(SHOW)}
+            onClose={back}
           />
         )}
         {mode === ERROR_DELETE && (
           <Error
             message="Error. Could not cancel appointment."
-            onClose={() => transition(SHOW)}
+            onClose={back}
           />
         )}
       </article>

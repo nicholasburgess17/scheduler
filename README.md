@@ -29,6 +29,9 @@ Scheduler updates in real time and upon creation, deletion or edit of an appoint
 
 Install dependencies with `npm install`.
 
+## retrieve the scheduler api
+[follow the instructions given in the readme to ensure this project has the required data!](https://github.com/lighthouse-labs/scheduler-api)
+
 ## Running Webpack Development Server
 
 ```sh
